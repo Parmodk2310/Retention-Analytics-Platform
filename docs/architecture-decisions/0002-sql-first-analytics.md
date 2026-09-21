@@ -18,7 +18,7 @@ shape typed responses.
 
 Benefits:
 
-- metric definitions are directly reviewable;
+- metric definitions can be inspected directly;
 - database query planning and indexes can be inspected;
 - bounded queries avoid transferring raw event histories to Python;
 - behavior resembles product analytics practice.
