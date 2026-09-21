@@ -1,45 +1,39 @@
 # Public release checklist
 
-Use this checklist before tagging a release or advertising the live demonstration.
-
-Status snapshot: 2026-09-22.
+Use this checklist before publishing a stable release or changing the advertised public demo.
 
 ## Source and security
 
 - [ ] Scan the complete Git history with Gitleaks.
-- [x] Confirm the production environment file is ignored and not staged.
-- [ ] Independently confirm private keys, Terraform state, saved plans and cloud credentials are
-      absent from the complete repository history.
-- [x] Confirm the public demo contains synthetic rather than customer data.
-- [x] Review current dependency/container security workflow results.
+- [ ] Confirm production environment files are ignored and not staged.
+- [ ] Confirm private keys, Terraform state, saved plans and cloud credentials are absent from the repository history.
+- [ ] Confirm public datasets and screenshots contain synthetic rather than customer data.
+- [ ] Review dependency and container security workflow results.
 
 ## Documentation and evidence
 
-- [x] README claims match the active public deployment.
-- [x] Replace final README screenshots with the latest polished live captures.
-- [ ] Verify all relative documentation links.
-- [x] Historical benchmark results are labelled as snapshots rather than service-level guarantees.
-- [x] Limitations and responsible-use constraints remain visible.
-- [x] Public GCP deployment and AWS reference architecture are distinguished.
+- [ ] Verify README claims against the active deployment and current source.
+- [ ] Verify screenshots match the current interface and contain no private infrastructure details.
+- [ ] Verify relative documentation links.
+- [ ] Label benchmark results as point-in-time validation rather than service-level guarantees.
+- [ ] Keep limitations and responsible-use boundaries visible.
+- [ ] Distinguish the active GCP demo from the AWS reference architecture and retained OCI path.
 
 ## Deployment
 
-- [x] HTTPS works from the public endpoint.
-- [x] API liveness probe passes.
-- [x] Only the Caddy gateway publishes public application ports.
-- [x] Persistent production services are running.
-- [x] Realtime ingestion was accepted through the public API.
-- [x] Redis consumer state reached zero pending messages and zero lag.
-- [ ] Review final backup/recovery expectations for the portfolio VM.
-- [x] Live URL is published only after the principal dashboard workflow passed.
+- [ ] Verify public HTTPS from an external network.
+- [ ] Verify API liveness and readiness.
+- [ ] Confirm only the gateway publishes public application ports.
+- [ ] Confirm persistent services are healthy.
+- [ ] Exercise the primary dashboard workflow.
+- [ ] Verify realtime ingestion, persistence and consumer-group state.
+- [ ] Review backup, recovery and cost controls for the active environment.
 
-## GitHub presentation
+## GitHub release
 
-- [x] Apache-2.0 license is present.
+- [ ] Confirm the Apache-2.0 license is detected correctly.
 - [ ] Review repository description, topics and social preview.
-- [x] `main` ruleset and required pull-request checks are active.
-- [x] Backend and frontend CI pass on the merged release work.
-- [x] Gitleaks and Trivy pass on the release pull request.
-- [ ] Create the final documentation pull request.
-- [ ] Merge the final documentation pull request after required checks pass.
-- [ ] Create and verify the `v1.0.0` release.
+- [ ] Confirm the `main` ruleset and required pull-request checks are active.
+- [ ] Merge release changes only after required CI and security checks pass.
+- [ ] Create the release tag from the intended `main` commit.
+- [ ] Verify release notes, source archives and advertised demo links.
