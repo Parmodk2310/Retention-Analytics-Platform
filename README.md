@@ -297,4 +297,4 @@ commercial product of the same or a similar name.
 ## License
 
 Licensed under the [Apache License 2.0](LICENSE). Synthetic sample data and project documentation
-are provided for portfolio and educational use under the same license unless noted otherwise.
+are provided under the same license unless noted otherwise.
