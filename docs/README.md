@@ -2,9 +2,9 @@
 
 Use the shortest path that matches your goal.
 
-## Reviewers
+## System overview
 
-- [Portfolio review](portfolio-review.md): five-minute tour, evidence and honest deployment status.
+- [System review guide](system-review.md): five-minute tour, evidence and deployment status.
 - [System design](architecture/system-design.md): components, boundaries and scaling path.
 - [Architecture decisions](architecture-decisions/): why the monorepo and SQL-first approach exist.
 
@@ -23,8 +23,8 @@ Use the shortest path that matches your goal.
 - [Experiment SRM runbook](runbooks/experiment-srm.md)
 - [API latency runbook](runbooks/api-latency.md)
 - [Threat model](security/threat-model.md)
-- [GCP public-demo runbook](runbooks/gcp-public-demo.md): live reviewer deployment and operations.
-- [OCI deployment assets](../infrastructure/oci/README.md): retained alternative single-node path.
+- [GCP public-demo runbook](runbooks/gcp-public-demo.md): live public demo deployment and operations.
+- [OCI deployment assets](../infrastructure/oci/README.md): alternative single-node deployment path.
 - [Public release checklist](public-release-checklist.md)
 
 ## Delivery history

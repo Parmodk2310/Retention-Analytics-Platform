@@ -14,7 +14,7 @@ This guide explains ownership and change flow. It avoids a brittle file-by-file 
 | `backend/app/realtime/` | Redis Streams behavior | Delivery reliability |
 | `backend/app/jobs/` | Worker, scoring and scheduled tasks | Offline operation |
 | `frontend/src/` | Typed analyst interface and API clients | User workflow |
-| `data-generator/` | Reproducible synthetic behavior | Demo data |
+| `data-generator/` | Reproducible synthetic behavior | Synthetic dataset |
 | `monitoring/` | Prometheus, Grafana and Alertmanager | Operational signal |
 | `infrastructure/terraform/` | AWS reference architecture | Cloud infrastructure |
 | `compose.production.yml` | Portable six-service production-style stack | Public GCP demo runtime |
@@ -71,5 +71,5 @@ Use the root README for tests, data generation and ML jobs.
 - contracts and runbooks remain accurate;
 - migrations and retries are safe;
 - no secrets or customer data enter Git;
-- state is described honestly as implemented, validated or live;
+- deployment state is labeled accurately as implemented, validated or live;
 - the pull request explains risk, evidence and rollback.

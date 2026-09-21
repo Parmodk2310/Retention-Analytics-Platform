@@ -1,13 +1,13 @@
-# Portfolio review guide
+# System review guide
 
-## Thirty-second summary
+## System summary
 
-RetentionOS is an end-to-end product analytics and ML engineering case study. Behavioral events can
-enter through a reliable asynchronous pipeline, PostgreSQL computes inspectable product metrics,
-offline ML produces persisted churn scores, and experimentation separates assignment from exposure
-before estimating effects.
+RetentionOS combines product analytics, asynchronous event processing, churn scoring and
+experimentation in one system. Behavioral events enter through Redis Streams, PostgreSQL provides
+the durable analytical record, offline ML produces persisted churn scores, and experiment analysis
+keeps assignment separate from exposure.
 
-The public reviewer environment is live at:
+The public demo is live at:
 
 `https://retentionos.34-0-15-46.sslip.io/`
 
@@ -63,17 +63,3 @@ See the [GCP public-demo runbook](runbooks/gcp-public-demo.md).
 - Legacy `/ml/churn/*` handlers are not the active scoring interface.
 - Real customer data would require additional privacy, backup, recovery, access-review and
   compliance controls.
-
-## Interview prompts
-
-- Why does assignment differ from exposure?
-- Why is PR-AUC more useful than accuracy for churn ranking?
-- Why are calibrated probabilities useful for retention prioritization?
-- Where does at-least-once delivery create duplicate risk?
-- Why does the analytics reporting anchor ignore anonymous-only events?
-- When should SQL analytics move to aggregates or a warehouse?
-- What changes for multi-zone recovery, regulated data or ten times the traffic?
-- Why is the live deployment smaller than the AWS reference architecture?
-
-Strong answers should connect each design choice to a concrete failure mode, operational constraint
-or trade-off.

@@ -2,10 +2,10 @@
 
 ## Purpose
 
-This runbook describes the live RetentionOS portfolio deployment on Google Compute Engine.
+This runbook describes the public RetentionOS deployment on Google Compute Engine.
 
-The environment is intended for recruiter, engineering and portfolio review. It uses synthetic
-data and is not a production customer workload.
+The environment exists for technical demonstration and uses synthetic data. It is not a production
+customer workload.
 
 ## Public endpoint
 
@@ -146,7 +146,7 @@ interpreted as customer outcomes.
 
 ## Availability boundary
 
-This is a single-node portfolio deployment.
+This is a single-node demo deployment.
 
 It does not provide:
 

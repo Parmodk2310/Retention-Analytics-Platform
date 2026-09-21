@@ -34,13 +34,13 @@ The AWS environment is retained as infrastructure-as-code and is not the active 
 
 `AWS_DEPLOY_ENABLED=false` remains the authorization and cost-control gate.
 
-## Phase 9 — Public portfolio deployment
+## Phase 9 — Public cloud demo
 
 The original low-cost deployment path targeted Oracle Cloud ARM64 capacity. Those deployment assets
 remain in the repository, but Oracle A1 capacity prevented that environment from becoming the
 public demo.
 
-The live portfolio deployment was completed on Google Compute Engine using the production-oriented
+The public deployment was completed on Google Compute Engine using the production-oriented
 single-node service boundary:
 
 - Caddy HTTPS gateway
@@ -68,5 +68,5 @@ Verification included:
 - protected pull-request workflow;
 - backend, frontend and security CI gates.
 
-The public demo is intentionally single-node and uses synthetic data. It is a reviewer environment,
-not a highly available customer production deployment.
+The public demo is intentionally single-node and uses synthetic data. It is a demonstration
+environment, not a highly available customer production deployment.

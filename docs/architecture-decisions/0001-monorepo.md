@@ -21,7 +21,7 @@ Benefits:
 - one reproducible local environment;
 - contract and consumer changes can land together;
 - shared CI and security policies;
-- architecture is easy for reviewers to navigate.
+- repository structure remains easy to navigate.
 
 Costs:
 
