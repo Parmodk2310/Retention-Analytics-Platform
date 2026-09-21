@@ -20,7 +20,7 @@ export function DriverList({
 
         <p className="mt-1 text-xs opacity-50">
           Relative importance from the
-          underlying XGBoost model.
+          selected production model.
         </p>
       </div>
 

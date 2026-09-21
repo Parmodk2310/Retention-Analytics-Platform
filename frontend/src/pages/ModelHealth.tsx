@@ -53,9 +53,9 @@ function Metric({
   hint?: string
 }) {
   return (
-    <div className="rounded-xl border bg-background/40 p-4">
+    <div className="min-w-0 rounded-xl border bg-background/40 p-4">
       <p className="text-xs font-medium uppercase tracking-wide opacity-50">{label}</p>
-      <p className="mt-2 text-xl font-semibold tabular-nums">{value}</p>
+      <p className="mt-2 break-words text-xl font-semibold tabular-nums">{value}</p>
       {hint && <p className="mt-1 text-xs leading-relaxed opacity-50">{hint}</p>}
     </div>
   )

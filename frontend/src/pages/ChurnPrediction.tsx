@@ -142,7 +142,7 @@ export default function ChurnPrediction() {
             <h2 className="text-2xl font-semibold">Churn Intelligence</h2>
             <p className="mt-1 max-w-3xl text-sm opacity-60">
               Calibrated 30-day inactivity-risk scoring backed by persisted batch
-              predictions and local TreeSHAP explanations.
+              predictions and interpretable local reason codes.
             </p>
           </div>
 
@@ -340,9 +340,8 @@ export default function ChurnPrediction() {
 
       <p className="text-xs leading-relaxed opacity-40">
         Risk bands are operational segments learned from the validation
-        distribution. SHAP impacts explain the underlying XGBoost margin and
-        should not be interpreted as additive changes to the displayed
-        calibrated probability.
+        distribution. Local reason codes provide diagnostic context and should
+        not be interpreted as causal effects.
       </p>
     </div>
   )

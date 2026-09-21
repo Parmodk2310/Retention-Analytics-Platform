@@ -33,7 +33,10 @@ async def info() -> SystemInfo:
         environment=settings.APP_ENV,
         version="1.0.0",
         features=SystemFeatures(
-            realtime=True,
+            realtime=(
+                settings.APP_ENV == "development"
+                or bool(settings.EVENT_INGEST_KEY)
+            ),
             churn_ml=True,
             experimentation=True,
         ),

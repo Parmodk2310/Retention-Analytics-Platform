@@ -28,13 +28,29 @@ const capabilities = [
   "A/B Experimentation",
   "Redis Streams",
   "Observability",
-  "AWS-ready Infrastructure",
+  "Cloud-ready Infrastructure",
 ];
 
 const platformComponents = [
   {
+    name: "Caddy Gateway",
+    description:
+      "Public HTTPS termination, security headers, HTTP/2 and HTTP/3",
+  },
+  {
+    name: "React + Nginx",
+    description:
+      "Responsive product workspace and same-origin API proxy",
+  },
+  {
+    name: "FastAPI",
+    description:
+      "Authenticated analytics, experimentation, ML, and system APIs",
+  },
+  {
     name: "PostgreSQL",
-    description: "Primary source of truth for product, experiment, and ML data",
+    description:
+      "Primary source of truth for product, experiment, and ML data",
   },
   {
     name: "Redis Streams",
@@ -42,25 +58,14 @@ const platformComponents = [
       "Durable event ingestion, consumer groups, retry, and recovery",
   },
   {
-    name: "Prometheus",
-    description: "Application and event-pipeline metrics collection",
-  },
-  {
-    name: "Grafana",
-    description: "Operational dashboards and pipeline visibility",
-  },
-  {
-    name: "Alertmanager",
-    description: "Routing for API and event-pipeline alerts",
-  },
-  {
-    name: "Sentry",
-    description: "Optional application error-tracing integration",
+    name: "Event Worker",
+    description:
+      "Asynchronous ingestion processing and persistence pipeline",
   },
 ];
 
 function formatFreshness(seconds: number | null): string {
-  if (seconds === null) return "Unknown";
+  if (seconds === null) return "No recent signal";
   if (seconds < 1) return "< 1 s";
   if (seconds < 60) return `${seconds.toFixed(1)} s`;
 
@@ -98,7 +103,7 @@ function PipelineStatusBadge({
   const labels = {
     fresh: "Fresh",
     stale: "Stale",
-    unknown: "Unknown",
+    unknown: "No signal",
   };
 
   return (
@@ -172,7 +177,28 @@ export default function Settings() {
             {BRAND.projectDescription}
           </p>
 
-          <p className="mt-3 text-sm font-medium">{BRAND.projectScale}</p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <span className="rounded-full border border-primary/30 bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">
+              {BRAND.projectScale}
+            </span>
+
+            <span className="rounded-full border bg-muted/30 px-2.5 py-1 text-xs opacity-80">
+              {BRAND.deployment}
+            </span>
+
+            <a
+              href={BRAND.liveUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-full border bg-muted/30 px-2.5 py-1 text-xs transition hover:bg-muted"
+            >
+              Live demo ↗
+            </a>
+          </div>
+
+          <p className="mt-3 max-w-3xl text-xs leading-5 opacity-55">
+            {BRAND.infrastructureNote}
+          </p>
 
           <div className="mt-4 flex flex-wrap gap-2">
             {capabilities.map((item) => (
@@ -350,7 +376,12 @@ export default function Settings() {
       <Card className="p-5">
         <div className="mb-4 flex items-center gap-2">
           <Database className="h-5 w-5 text-primary" />
-          <h3 className="font-semibold">Platform Architecture</h3>
+          <div>
+            <h3 className="font-semibold">Live Runtime Architecture</h3>
+            <p className="mt-0.5 text-xs opacity-50">
+              Services used by the public single-node demo.
+            </p>
+          </div>
         </div>
 
         <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
@@ -377,10 +408,12 @@ export default function Settings() {
             <h3 className="font-semibold">Observability Boundary</h3>
 
             <p className="mt-1 max-w-4xl text-sm leading-6 opacity-65">
-              Prometheus collects API and worker metrics, Grafana provides
-              operational dashboards, and Alertmanager evaluates configured
-              reliability alerts. PostgreSQL remains the application source of
-              truth while Redis Streams provides durable event ingestion.
+              The repository includes Prometheus, Grafana, Alertmanager,
+              and optional error-tracing integrations for observability
+              workflows. The public portfolio deployment intentionally runs a
+              smaller six-service Docker Compose footprint. PostgreSQL remains
+              the application source of truth while Redis Streams provides
+              durable event ingestion.
             </p>
           </div>
         </div>

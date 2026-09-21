@@ -23,7 +23,7 @@ def score_latest() -> dict:
     version = meta["model_version"]
     rows = []
     for (_, row), score in zip(frame.iterrows(), scores, strict=True):
-        band = risk_band(float(score))
+        band = risk_band(float(score), meta)
         CHURN_PREDICTIONS.labels(band).inc()
         rows.append(
             ChurnScore(

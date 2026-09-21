@@ -1,6 +1,7 @@
 WITH anchor AS (
     SELECT COALESCE(MAX(event_date), CURRENT_DATE)::date AS as_of_date
     FROM events
+    WHERE user_id IS NOT NULL
 ),
 cohort_bounds AS (
     SELECT

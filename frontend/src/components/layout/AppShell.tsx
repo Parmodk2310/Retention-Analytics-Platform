@@ -1,19 +1,33 @@
+import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 
 import { Header } from '@/components/layout/Header'
 import { Sidebar } from '@/components/layout/Sidebar'
 
-
 export function AppShell() {
+  const [
+    mobileNavigationOpen,
+    setMobileNavigationOpen,
+  ] = useState(false)
+
   return (
     <div className="flex h-screen overflow-hidden bg-background">
-      <Sidebar />
+      <Sidebar
+        mobileOpen={mobileNavigationOpen}
+        onMobileClose={() =>
+          setMobileNavigationOpen(false)
+        }
+      />
 
       <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
-        <Header />
+        <Header
+          onOpenNavigation={() =>
+            setMobileNavigationOpen(true)
+          }
+        />
 
         <main className="min-h-0 flex-1 overflow-y-auto">
-          <div className="mx-auto w-full p-5">
+          <div className="mx-auto w-full p-4 sm:p-5">
             <Outlet />
           </div>
         </main>
