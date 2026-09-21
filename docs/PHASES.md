@@ -1,7 +1,7 @@
 # Implementation phases
 
-This ledger records delivered outcomes and current deployment state. Detailed ownership lives in
-the [repository guide](Project_Guide.md).
+This ledger records delivered outcomes and the current deployment state. Detailed ownership lives
+in the [repository guide](Project_Guide.md).
 
 | Phase | Outcome | Status |
 |---|---|---|
@@ -13,39 +13,60 @@ the [repository guide](Project_Guide.md).
 | 5 | Assignment, exposure, SRM, inference, power and decisions | Complete |
 | 6 | Authentication, validation, limits and security scanning | Complete |
 | 7 | Redis Streams reliability, observability and product polish | Complete |
-| 8 | Modular AWS Terraform and gated OIDC deployment | Complete, not applied |
-| 9 | Cost-aware OCI live-demo deployment | In progress |
+| 8 | Modular AWS Terraform and gated deployment workflow | Complete, reference only |
+| 9 | Public single-node cloud demo with HTTPS and operational verification | Complete |
 
 ## Phase 7 validation snapshot
 
 The Phase 7 freeze recorded 167 backend tests passing with four skipped, eight frontend tests,
-clean Gitleaks/pip-audit/npm-audit results, healthy monitoring targets and a 2,000-event benchmark
-ending with zero backlog, pending messages and consumer lag. This is historical evidence, not a
-permanent guarantee.
+clean security checks, healthy monitoring targets and a 2,000-event reliability benchmark ending
+with zero backlog, pending messages and consumer lag.
+
+These are historical validation results, not permanent service-level guarantees.
 
 ## Phase 8 — AWS reference architecture
 
-Delivered VPC/data boundaries, HTTPS ALB, ECS API and worker tasks, ECR, RDS, ElastiCache, private
-S3/CloudFront delivery, encrypted model artifacts, alarms, scheduled tasks, OIDC and a gated
-production workflow. Terraform formatting/validation, Actionlint, Gitleaks, Trivy, frontend build,
-non-root runtime and smoke tests passed.
+Phase 8 delivered the AWS reference architecture, including network and data boundaries, ECS API
+and worker services, ECR, RDS, ElastiCache, load balancing, private object delivery, monitoring,
+scheduled tasks, OIDC and gated deployment controls.
 
-No Terraform apply occurred. `AWS_DEPLOY_ENABLED=false`; Terraform-generated frontend bucket and
-CloudFront distribution variables remain absent.
+The AWS environment is retained as infrastructure-as-code and is not the active public demo.
 
-## Phase 9 — OCI portfolio deployment
+`AWS_DEPLOY_ENABLED=false` remains the authorization and cost-control gate.
 
-Delivered ARM64 CPU-only XGBoost, pinned images, Caddy HTTPS, private Compose networking,
-host-hardening/deployment scripts, an operations runbook, a full local production smoke test and a
-dedicated OCI NSG.
+## Phase 9 — Public portfolio deployment
 
-Pending:
+The original low-cost deployment path targeted Oracle Cloud ARM64 capacity. Those deployment assets
+remain in the repository, but Oracle A1 capacity prevented that environment from becoming the
+public demo.
 
-- acquire Singapore `VM.Standard.A1.Flex` capacity;
-- bootstrap Ubuntu and configure noncommitted secrets;
-- migrate, seed/train/score as required, and start services;
-- verify the public HTTPS URL;
-- mark pull request #28 ready and merge.
+The live portfolio deployment was completed on Google Compute Engine using the production-oriented
+single-node service boundary:
 
-Oracle capacity is an external blocker. Do not substitute a paid shape merely to mark the phase
-complete.
+- Caddy HTTPS gateway
+- React + Nginx frontend
+- FastAPI backend
+- PostgreSQL
+- Redis Streams
+- Event worker
+
+Public HTTPS endpoint:
+
+`https://retentionos.34-0-15-46.sslip.io/`
+
+Verification included:
+
+- external HTTPS access;
+- API liveness;
+- healthy persistent services;
+- realtime event acceptance;
+- Redis Streams consumption;
+- PostgreSQL persistence;
+- zero pending consumer messages;
+- zero consumer lag;
+- responsive frontend verification;
+- protected pull-request workflow;
+- backend, frontend and security CI gates.
+
+The public demo is intentionally single-node and uses synthetic data. It is a reviewer environment,
+not a highly available customer production deployment.
