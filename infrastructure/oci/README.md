@@ -1,8 +1,9 @@
-# OCI Portfolio Deployment
+# OCI alternative deployment path
 
-This directory contains the deployment path for a cost-aware Oracle Cloud demo. The configuration
-is validated, but the service is not live until the verification section succeeds against a real
-public URL. AWS Terraform remains the reference enterprise architecture.
+This directory retains the original cost-aware Oracle Cloud deployment path. It is not the active
+public environment; the live demo runs on Google Compute Engine. The OCI assets remain useful for
+ARM64 verification and provider portability. AWS Terraform remains the distributed reference
+architecture.
 
 ## Target
 
@@ -13,8 +14,8 @@ public URL. AWS Terraform remains the reference enterprise architecture.
 - Public ports: TCP 80/443 and UDP 443
 - SSH restricted to the administrator IP
 
-Singapore A1 capacity is currently the external blocker. Do not replace A1 with a paid
-`VM.Standard2.*` shape merely to complete the demo.
+A1 capacity prevented the original public deployment. These assets are retained as an alternative
+path and are not required for the current GCP demo.
 
 ## Architecture
 
@@ -44,8 +45,8 @@ Never commit `.env.production`.
 - Check the API at `https://${PUBLIC_HOST}/api/v1/health/live`.
 - Only Caddy should publish host ports.
 
-Record a live URL in the root README only after HTTPS, the API probe and the primary dashboard
-workflow all pass from a separate internet connection.
+If this deployment path is used, publish its URL only after HTTPS, the API probe and the primary
+dashboard workflow pass from a separate internet connection.
 
 ## Operations
 
