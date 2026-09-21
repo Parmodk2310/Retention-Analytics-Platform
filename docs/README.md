@@ -4,7 +4,7 @@ Use the shortest path that matches your goal.
 
 ## System overview
 
-- [System review guide](portfolio-review.md): five-minute tour, evidence and deployment status.
+- [System review guide](system-review.md): five-minute tour, evidence and deployment status.
 - [System design](architecture/system-design.md): components, boundaries and scaling path.
 - [Architecture decisions](architecture-decisions/): why the monorepo and SQL-first approach exist.
 
