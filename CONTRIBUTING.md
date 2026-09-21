@@ -1,7 +1,7 @@
 # Contributing
 
 1. Branch from the current default branch.
-2. Keep each pull request focused on one reviewable outcome.
+2. Keep each pull request focused on one clear outcome.
 3. Add tests for behavioral changes and migrations for schema changes.
 4. Run affected backend/frontend checks from the root README.
 5. Update contracts, architecture or runbooks when behavior changes.
