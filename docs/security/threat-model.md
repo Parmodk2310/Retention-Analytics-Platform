@@ -3,7 +3,7 @@
 ## Scope and assumptions
 
 This model covers the dashboard, API, event ingestion, PostgreSQL, Redis, ML artifacts, CI/CD and
-cloud deployment paths. The portfolio environment uses synthetic data. Internet clients, event
+cloud deployment paths. The public demo environment uses synthetic data. Internet clients, event
 producers and compromised credentials are treated as untrusted.
 
 ## Assets
@@ -39,9 +39,9 @@ flowchart TD
 | Data exfiltration | Private data services, no public Compose ports, least-privilege IAM | Add audited access and egress policy for real data |
 | Supply-chain compromise | Lock files, immutable action/image references, Gitleaks and Trivy | Add signed artifacts/SBOM enforcement |
 | Cloud credential leakage | GitHub OIDC and secret stores; no permanent deploy key in GitHub | Rotate local operator keys and review trust policies |
-| Cost abuse | Deployment gates, bootstrap desired count zero, free-shape checks | Add billing alarms and quotas before apply |
+| Cost abuse | Deployment gates and a fixed demo footprint | Add billing alarms, budgets and quotas for long-lived environments |
 | Model misuse | Offline training, persisted lineage and health metadata | Add approval, fairness and rollback policy |
-| Availability loss | Health probes, restarts, metrics, retries and DLQ | Single-node OCI demo is not highly available |
+| Availability loss | Health probes, restarts, metrics, retries and DLQ | Single-node GCP demo is not highly available |
 
 ## Security invariants
 
