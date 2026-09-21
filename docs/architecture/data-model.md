@@ -38,8 +38,8 @@ erDiagram
 
 ## Time and deletion policy
 
-Application timestamps are UTC. Analytics endpoints require bounded windows. The portfolio dataset
-is synthetic; a real deployment would additionally require retention schedules, deletion workflows,
+Application timestamps are UTC. Analytics endpoints require bounded windows. The demo dataset is
+synthetic; a real deployment would additionally require retention schedules, deletion workflows,
 data-subject handling and auditable backup policies.
 
 ## Integrity
