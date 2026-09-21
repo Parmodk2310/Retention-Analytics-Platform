@@ -23,12 +23,13 @@ Use the shortest path that matches your goal.
 - [Experiment SRM runbook](runbooks/experiment-srm.md)
 - [API latency runbook](runbooks/api-latency.md)
 - [Threat model](security/threat-model.md)
-- [OCI deployment](../infrastructure/oci/README.md)
+- [GCP public-demo runbook](runbooks/gcp-public-demo.md): live reviewer deployment and operations.
+- [OCI deployment assets](../infrastructure/oci/README.md): retained alternative single-node path.
 - [Public release checklist](public-release-checklist.md)
 
 ## Delivery history
 
-- [Implementation phases](PHASES.md): completed milestones and current Phase 9 status.
+- [Implementation phases](PHASES.md): completed milestones and final public-deployment state.
 
 Documentation uses **implemented**, **validated**, and **deployed** deliberately. These states are
 not interchangeable.

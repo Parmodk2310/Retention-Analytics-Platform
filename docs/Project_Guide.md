@@ -17,7 +17,9 @@ This guide explains ownership and change flow. It avoids a brittle file-by-file 
 | `data-generator/` | Reproducible synthetic behavior | Demo data |
 | `monitoring/` | Prometheus, Grafana and Alertmanager | Operational signal |
 | `infrastructure/terraform/` | AWS reference architecture | Cloud infrastructure |
-| `infrastructure/oci/` | Cost-aware demo operations | Single-node deployment |
+| `compose.production.yml` | Portable six-service production-style stack | Public GCP demo runtime |
+| `docs/runbooks/gcp-public-demo.md` | Live GCP operations | Public demo verification and updates |
+| `infrastructure/oci/` | Retained alternative single-node deployment assets | OCI deployment path |
 | `.github/workflows/` | CI, security and deployment gates | Delivery policy |
 
 ## Change by concern

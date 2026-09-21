@@ -10,6 +10,14 @@ ingestion, SQL analytics, calibrated churn scoring, A/B experimentation and oper
 in one reviewable system. It is a portfolio case study for product data science and ML engineering,
 not a claim of production customer usage.
 
+> **Live demo:** https://retentionos.34-0-15-46.sslip.io/
+>
+> **Demo scale:** 10K synthetic users · ~238K product events
+>
+> **Runtime:** Google Compute Engine · Docker Compose · Caddy HTTPS
+>
+> **Boundary:** portfolio/reviewer environment using synthetic data; not production customer traffic.
+
 ![RetentionOS retention and engagement overview](docs/assets/overview.webp)
 
 ## Why this project
@@ -28,14 +36,15 @@ failure modes between collection, storage, modeling, experimentation and deliver
 | Product analytics | DAU/WAU/MAU, stickiness, revenue and channel performance | Where product health is changing |
 | Funnel analysis | Ordered stage progression and drop-off | Where to investigate conversion loss |
 | Cohort retention | Monthly acquisition cohorts | Whether engagement persists over time |
-| Churn intelligence | Temporal validation, calibration, persisted scores and SHAP drivers | Which users warrant retention attention |
+| Churn intelligence | Temporal validation, calibration, persisted scores and interpretable reason codes | Which users warrant retention attention |
 | Experimentation | Assignment, exposure, SRM, intervals and power | Whether evidence supports shipping |
 | Event reliability | Redis Streams, recovery, retries, DLQ and idempotent writes | Whether behavioral data is trustworthy |
 | Operations | Health probes, metrics, dashboards, alerts and structured logs | Whether the platform is behaving normally |
 | Delivery | Docker Compose, gated workflows and modular Terraform | How the system can be reproduced and operated |
 
-The demonstration dataset models up to 50,000 synthetic users and approximately 1.2M events.
-Synthetic data supplies known channel, churn and treatment effects without exposing customer data.
+The public demonstration currently contains 10,000 synthetic users and approximately 238K
+product events. Synthetic data supplies known channel, churn and treatment effects without exposing
+customer data.
 
 ## Product walkthrough
 
@@ -50,9 +59,9 @@ SQL-backed metrics keep business definitions inspectable and reusable across the
 ### Prioritize retention work
 
 Offline jobs create versioned model artifacts and persisted user-level scores. The application
-serves calibrated risk bands and local explanations without retraining inside an API request.
+serves calibrated risk bands and persisted diagnostic reason codes without retraining inside an API request.
 
-![Persisted churn scores and model-derived risk drivers](docs/assets/churn-intelligence.webp)
+![Persisted churn scores and diagnostic reason codes](docs/assets/churn-intelligence.webp)
 
 ### Evaluate a product change
 
@@ -68,6 +77,17 @@ confusion matrix and dataset contract. A review warning is intentional when qual
 human attention; it is not silently converted into a positive status.
 
 ![Temporal model evaluation, calibration and decision policy](docs/assets/model-health.webp)
+
+### Responsive reviewer experience
+
+The dashboard includes a responsive navigation drawer so the same reviewer workflow remains usable
+on smaller screens without changing the underlying analytics or API behavior.
+
+<p align="center">
+  <img src="docs/assets/mobile-navigation.webp"
+       alt="RetentionOS responsive mobile navigation"
+       width="360">
+</p>
 
 ## Architecture
 
@@ -121,8 +141,8 @@ experiment outcomes are counted only after exposure and outcome maturity.
   requests read persisted scores.
 - **Temporal evaluation:** whole snapshot dates remain separated across fit, calibration,
   validation and test boundaries.
-- **Two deployment goals:** AWS Terraform describes the scalable reference architecture; OCI
-  Compose provides a cost-aware demonstration path.
+- **Two deployment goals:** the public portfolio demo runs on Google Compute Engine using the
+  production Docker Compose stack; AWS Terraform remains the scalable reference architecture.
 - **No Kubernetes by default:** it adds operational surface without improving this workload.
 
 ## Verified evolution
@@ -134,8 +154,8 @@ experiment outcomes are counted only after exposure and outcome maturity.
 | Experimentation | Deterministic allocation, exposure integrity, SRM, inference and power |
 | Event pipeline | Pending recovery, bounded retry, DLQ and idempotent persistence |
 | Platform hardening | Authentication, rate limits, health probes, monitoring and security scans |
-| Cloud architecture | Validated AWS Terraform and gated OIDC deployment workflow |
-| Portfolio delivery | ARM64-compatible OCI Compose stack and operational runbooks |
+| Cloud architecture | AWS Terraform reference architecture and gated deployment workflow |
+| Portfolio delivery | Public GCP Compute Engine demo with Docker Compose, Caddy and HTTPS |
 
 The Phase 7 freeze recorded 167 passing backend tests with four skipped, eight passing frontend
 tests, clean secret/dependency audits, healthy monitoring targets and a 2,000-event reliability
@@ -152,10 +172,10 @@ See the [phase ledger](docs/PHASES.md) and [five-minute reviewer guide](docs/por
 | API | Python 3.12, FastAPI, Pydantic, SQLAlchemy, Alembic |
 | Data | PostgreSQL, parameterized SQL, synthetic data generator |
 | Streaming | Redis Streams, consumer groups and dead-letter queue |
-| ML | scikit-learn, XGBoost CPU, SHAP, joblib, temporal evaluation and calibration |
+| ML | scikit-learn, calibrated logistic regression, optional XGBoost/SHAP tooling, joblib and temporal evaluation |
 | Experimentation | Deterministic hashing, SRM tests, two-proportion inference and power analysis |
 | Observability | Prometheus, Grafana, Alertmanager, structured logging and optional Sentry |
-| Delivery | Docker Compose, GitHub Actions, Terraform, AWS, OCI and Caddy |
+| Delivery | Docker Compose, GitHub Actions, Terraform, Google Compute Engine, AWS reference IaC and Caddy |
 
 The complete inventory is in [docs/DEPENDENCIES.md](docs/DEPENDENCIES.md).
 
@@ -165,15 +185,17 @@ The complete inventory is in [docs/DEPENDENCIES.md](docs/DEPENDENCIES.md).
 |---|---|
 | Local Docker environment | Implemented and smoke-tested |
 | CI and security checks | Backend, frontend, Gitleaks and Trivy workflows implemented |
-| AWS reference architecture | Terraform validated; intentionally not applied |
-| OCI portfolio environment | Stack and runbooks implemented; live VM pending Singapore A1 capacity |
-| Public application URL | Not available yet |
+| AWS reference architecture | Terraform retained as a reference deployment path |
+| Public GCP portfolio environment | Live on Google Compute Engine with six-service Docker Compose |
+| Public application URL | https://retentionos.34-0-15-46.sslip.io/ |
 
 The AWS design includes ECS Fargate, RDS, ElastiCache, ALB, ECR, private S3/CloudFront delivery,
 monitoring and scheduled tasks. `AWS_DEPLOY_ENABLED=false` remains the cost and authorization gate.
 
-The OCI path runs Caddy, frontend, API, worker, PostgreSQL and Redis on an ARM64 host while exposing
-only the HTTPS gateway. See the [OCI runbook](infrastructure/oci/README.md) and
+The public GCP deployment runs Caddy, frontend, API, event worker, PostgreSQL and Redis on a
+single Compute Engine VM while exposing only the HTTPS gateway. The repository also retains the
+single-node Compose deployment assets and AWS Terraform reference architecture. See the
+[GCP public-demo runbook](docs/runbooks/gcp-public-demo.md) and
 [Terraform security decisions](infrastructure/terraform/SECURITY.md).
 
 Passing CI proves the reviewed checks; it does not prove that cloud resources are currently live.
@@ -256,9 +278,9 @@ bases are pinned to immutable references.
 ## Current limitations
 
 - The dataset is synthetic; displayed findings are demonstrations, not customer outcomes.
-- The OCI target is single-node and not highly available.
-- AWS Terraform is validated but has not been applied.
-- A public HTTPS application URL is pending cloud capacity.
+- The public GCP demo is single-node and not highly available.
+- AWS Terraform is retained as a reference architecture and is not the active public deployment.
+- The public demo uses synthetic data and is intended for portfolio/reviewer evaluation rather than customer traffic.
 - Legacy `/ml/churn/*` handlers are not the active scoring interface; the dashboard reads persisted
   `/churn/*` results.
 - Production use with real data requires organization-specific privacy, backup, recovery,
@@ -278,7 +300,9 @@ commercial product of the same or a similar name.
 **Parmod K** — Data Science & ML Engineering
 
 - GitHub: [@Parmodk2310](https://github.com/Parmodk2310)
-- Portfolio: coming soon
+- Portfolio: https://parmodk2310.vercel.app/
+- Live demo: https://retentionos.34-0-15-46.sslip.io/
+
 ## License
 
 Licensed under the [Apache License 2.0](LICENSE). Synthetic sample data and project documentation
