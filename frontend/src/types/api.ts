@@ -59,12 +59,16 @@ export type ChannelPerformance = {
 
 export type RiskBand = 'low' | 'medium' | 'high' | 'critical'
 
-export type ChurnReason = {
+export type StructuredChurnReason = {
   feature: string
-  label: string
+  label?: string | null
   impact: number
   direction: 'increases_risk' | 'reduces_risk'
 }
+
+export type ChurnReason =
+  | string
+  | StructuredChurnReason
 
 export type ChurnScore = {
   user_id: string

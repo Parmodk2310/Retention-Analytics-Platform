@@ -1,14 +1,31 @@
 export const BRAND = {
   productName: 'RetentionOS',
-  productTagline: 'Product Analytics & Experimentation',
+  productTagline: 'Product Analytics · Churn ML · Experiments',
+
   ownerName: 'Parmod K',
   ownerTitle: 'Data Science & ML Engineering',
+
   githubUsername: 'Parmodk2310',
-  repositoryName: 'retention-and-experimentation-platform',
+
+  repositoryName: 'Retention-Analytics-Platform',
   repositoryUrl:
-    'https://github.com/Parmodk2310/retention-and-experimentation-platform',
-  portfolioUrl: 'https://parmodk2310.vercel.app/',
+    'https://github.com/Parmodk2310/Retention-Analytics-Platform',
+
+  portfolioUrl:
+    'https://parmodk2310.vercel.app/',
+
+  liveUrl:
+    'https://retentionos.34-0-15-46.sslip.io/',
+
   projectDescription:
-    'Production-oriented product analytics platform spanning event instrumentation, retention and funnel analytics, churn prediction, statistically rigorous experimentation, observability, and AWS-ready deployment.',
-  projectScale: '50K synthetic users · ~1.2M product events · 12-month behavioral history',
-} as const;
+    'Production-oriented product analytics platform spanning retention and funnel analytics, churn prediction, statistically rigorous experimentation, event reliability, observability, and cloud deployment.',
+
+  projectScale:
+    'Live demo · 10K synthetic users · ~238K product events',
+
+  deployment:
+    'Google Compute Engine · Docker Compose · HTTPS',
+
+  infrastructureNote:
+    'Public single-node GCP demo with AWS infrastructure-as-code retained as a validated reference architecture.',
+} as const

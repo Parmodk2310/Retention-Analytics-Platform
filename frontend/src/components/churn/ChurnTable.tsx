@@ -34,6 +34,17 @@ function ReasonChip({
 }: {
   reason: ChurnReason
 }) {
+  if (typeof reason === 'string') {
+    return (
+      <span
+        title="Operational reason code from the scoring pipeline"
+        className="inline-flex items-center rounded-lg border px-2 py-1 text-xs"
+      >
+        {reason}
+      </span>
+    )
+  }
+
   const increasing =
     reason.direction ===
     'increases_risk'
@@ -41,8 +52,7 @@ function ReasonChip({
   return (
     <span
       title={
-        'TreeSHAP contribution on the ' +
-        'underlying XGBoost model margin'
+        'Local model contribution for this user'
       }
       className="inline-flex items-center gap-1 rounded-lg border px-2 py-1 text-xs"
     >
@@ -165,7 +175,9 @@ export function ChurnTable({
                     ) => (
                       <ReasonChip
                         key={
-                          `${reason.feature}-${index}`
+                          typeof reason === 'string'
+                            ? `${reason}-${index}`
+                            : `${reason.feature}-${index}`
                         }
                         reason={
                           reason

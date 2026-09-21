@@ -16,13 +16,17 @@ function titleCase(value: string): string {
 }
 
 export function featureLabel(
-  feature: string,
+  feature: string | null | undefined,
   providedLabel?: string | null,
 ): string {
   const explicit = providedLabel?.trim();
 
   if (explicit) {
     return explicit;
+  }
+
+  if (!feature) {
+    return "Unknown driver";
   }
 
   if (FEATURE_LABELS[feature]) {
