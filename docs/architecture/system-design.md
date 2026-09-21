@@ -36,10 +36,11 @@ Analytics queries read PostgreSQL directly. Event ingestion acknowledges queue a
 
 ## Deployment views
 
-### Local and OCI demo
+### Local and public demo
 
-Docker Compose runs six production services on one ARM64-capable host. Only Caddy publishes ports.
-This is cost-aware and reproducible, but it is not highly available.
+Local development uses Docker Compose. The public demo uses the same six-service Compose boundary on
+a single Google Compute Engine VM. Only Caddy publishes public application ports. This keeps the
+deployment reproducible, but it is not highly available.
 
 ### AWS reference architecture
 
@@ -68,7 +69,7 @@ place compute in private subnets, and add WAF and organization-specific complian
 
 ## Explicit non-goals
 
-- Kubernetes orchestration for the portfolio workload.
+- Kubernetes orchestration for the current workload.
 - Online model training or per-request model retraining.
 - Real customer PII.
-- A claim that the current OCI or AWS design is already a live multi-region service.
+- Multi-region or highly available claims for the single-node public demo.
