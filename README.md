@@ -160,7 +160,7 @@ tests, clean secret/dependency audits, healthy monitoring targets and a 2,000-ev
 benchmark ending with zero backlog, pending messages and consumer lag. These are historical
 validation results, not permanent service-level guarantees.
 
-See the [phase ledger](docs/PHASES.md) and [system review guide](docs/portfolio-review.md).
+See the [phase ledger](docs/PHASES.md) and [system review guide](docs/system-review.md).
 
 ## Technology
 
