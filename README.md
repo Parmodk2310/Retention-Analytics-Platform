@@ -5,10 +5,10 @@
 [![Security](https://github.com/Parmodk2310/retention-analytics-platform/actions/workflows/security.yml/badge.svg)](https://github.com/Parmodk2310/retention-analytics-platform/actions/workflows/security.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 
-RetentionOS is a production-style product intelligence platform that connects behavioral event
-ingestion, SQL analytics, calibrated churn scoring, A/B experimentation and operational monitoring
-in one reviewable system. It is a portfolio case study for product data science and ML engineering,
-not a claim of production customer usage.
+RetentionOS is a product analytics and ML engineering system that combines behavioral event
+ingestion, SQL analytics, calibrated churn scoring, A/B experimentation and operational monitoring.
+The public demo uses synthetic data; it does not represent production customer traffic or customer
+data.
 
 > **Live demo:** https://retentionos.34-0-15-46.sslip.io/
 >
@@ -16,18 +16,16 @@ not a claim of production customer usage.
 >
 > **Runtime:** Google Compute Engine · Docker Compose · Caddy HTTPS
 >
-> **Boundary:** portfolio/reviewer environment using synthetic data; not production customer traffic.
+> **Boundary:** public demonstration environment using synthetic data; not production customer traffic.
 
 ![RetentionOS retention and engagement overview](docs/assets/overview.webp)
 
-## Why this project
+## Problem
 
-Product teams frequently answer connected questions with disconnected tools: where users abandon
-the journey, which acquisition channels create durable value, who may become inactive, whether a
-treatment caused an improvement, and whether the underlying data can be trusted. Fragmentation
-makes definitions inconsistent and separates analysis from action. I built RetentionOS to
-demonstrate the complete path from a behavioral event to an explainable decision—including the
-failure modes between collection, storage, modeling, experimentation and delivery.
+Product teams often analyze funnel drop-off, acquisition quality, churn risk, treatment effects and
+data reliability in separate tools. That fragmentation can produce inconsistent definitions and
+break the link between analysis and operational behavior. RetentionOS keeps these concerns in one
+system so ingestion, analytics, scoring, experimentation and delivery can be inspected together.
 
 ## What it delivers
 
@@ -78,10 +76,10 @@ human attention; it is not silently converted into a positive status.
 
 ![Temporal model evaluation, calibration and decision policy](docs/assets/model-health.webp)
 
-### Responsive reviewer experience
+### Responsive navigation
 
-The dashboard includes a responsive navigation drawer so the same reviewer workflow remains usable
-on smaller screens without changing the underlying analytics or API behavior.
+The dashboard includes a responsive navigation drawer so the same workflows remain usable on
+smaller screens without changing the underlying analytics or API behavior.
 
 <p align="center">
   <img src="docs/assets/mobile-navigation.webp"
@@ -141,7 +139,7 @@ experiment outcomes are counted only after exposure and outcome maturity.
   requests read persisted scores.
 - **Temporal evaluation:** whole snapshot dates remain separated across fit, calibration,
   validation and test boundaries.
-- **Two deployment goals:** the public portfolio demo runs on Google Compute Engine using the
+- **Two deployment goals:** the public demo runs on Google Compute Engine using the
   production Docker Compose stack; AWS Terraform remains the scalable reference architecture.
 - **No Kubernetes by default:** it adds operational surface without improving this workload.
 
@@ -155,14 +153,14 @@ experiment outcomes are counted only after exposure and outcome maturity.
 | Event pipeline | Pending recovery, bounded retry, DLQ and idempotent persistence |
 | Platform hardening | Authentication, rate limits, health probes, monitoring and security scans |
 | Cloud architecture | AWS Terraform reference architecture and gated deployment workflow |
-| Portfolio delivery | Public GCP Compute Engine demo with Docker Compose, Caddy and HTTPS |
+| Public demo deployment | Google Compute Engine with Docker Compose, Caddy and HTTPS |
 
 The Phase 7 freeze recorded 167 passing backend tests with four skipped, eight passing frontend
 tests, clean secret/dependency audits, healthy monitoring targets and a 2,000-event reliability
 benchmark ending with zero backlog, pending messages and consumer lag. These are historical
 validation results, not permanent service-level guarantees.
 
-See the [phase ledger](docs/PHASES.md) and [five-minute reviewer guide](docs/portfolio-review.md).
+See the [phase ledger](docs/PHASES.md) and [system review guide](docs/portfolio-review.md).
 
 ## Technology
 
@@ -179,14 +177,14 @@ See the [phase ledger](docs/PHASES.md) and [five-minute reviewer guide](docs/por
 
 The complete inventory is in [docs/DEPENDENCIES.md](docs/DEPENDENCIES.md).
 
-## Production delivery and infrastructure
+## Deployment and infrastructure
 
 | Target | Current state |
 |---|---|
 | Local Docker environment | Implemented and smoke-tested |
 | CI and security checks | Backend, frontend, Gitleaks and Trivy workflows implemented |
 | AWS reference architecture | Terraform retained as a reference deployment path |
-| Public GCP portfolio environment | Live on Google Compute Engine with six-service Docker Compose |
+| Public GCP demo environment | Live on Google Compute Engine with six-service Docker Compose |
 | Public application URL | https://retentionos.34-0-15-46.sslip.io/ |
 
 The AWS design includes ECS Fargate, RDS, ElastiCache, ALB, ECR, private S3/CloudFront delivery,
@@ -198,7 +196,8 @@ single-node Compose deployment assets and AWS Terraform reference architecture. 
 [GCP public-demo runbook](docs/runbooks/gcp-public-demo.md) and
 [Terraform security decisions](infrastructure/terraform/SECURITY.md).
 
-Passing CI proves the reviewed checks; it does not prove that cloud resources are currently live.
+CI validates repository checks; runtime availability is verified separately through the public
+HTTPS endpoint and API health checks.
 
 ## Quick start
 
@@ -208,7 +207,7 @@ Requirements: Docker, Docker Compose v2 and Git.
 git clone https://github.com/Parmodk2310/retention-analytics-platform.git
 cd retention-analytics-platform
 cp .env.example .env
-# Replace development placeholders before sharing the environment.
+# Replace development placeholders before use.
 docker compose up -d postgres redis
 docker compose run --rm backend alembic upgrade head
 docker compose up -d backend event-worker frontend
@@ -263,7 +262,7 @@ bases are pinned to immutable references.
 | `data-generator/` | Reproducible synthetic product behavior |
 | `monitoring/` | Dashboards, metrics and alert rules |
 | `infrastructure/terraform/` | AWS reference architecture |
-| `infrastructure/oci/` | Single-node portfolio deployment and operations |
+| `infrastructure/oci/` | Retained alternative single-node deployment path |
 | `docs/` | Contracts, architecture, ADRs, runbooks and security model |
 
 ## Documentation
@@ -280,7 +279,7 @@ bases are pinned to immutable references.
 - The dataset is synthetic; displayed findings are demonstrations, not customer outcomes.
 - The public GCP demo is single-node and not highly available.
 - AWS Terraform is retained as a reference architecture and is not the active public deployment.
-- The public demo uses synthetic data and is intended for portfolio/reviewer evaluation rather than customer traffic.
+- The public demo uses synthetic data and is intended for demonstration and technical review rather than customer traffic.
 - Legacy `/ml/churn/*` handlers are not the active scoring interface; the dashboard reads persisted
   `/churn/*` results.
 - Production use with real data requires organization-specific privacy, backup, recovery,
@@ -292,16 +291,8 @@ Retention scores are prioritization signals, not facts about a person. Do not us
 high-impact or discriminatory decisions. Before processing real customer data, define lawful use,
 retention periods, access controls, human review, fairness monitoring and deletion procedures.
 
-This repository is an independent portfolio/reference implementation and is not affiliated with a
+This repository is an independent reference implementation and is not affiliated with a
 commercial product of the same or a similar name.
-
-## Author
-
-**Parmod K** — Data Science & ML Engineering
-
-- GitHub: [@Parmodk2310](https://github.com/Parmodk2310)
-- Portfolio: https://parmodk2310.vercel.app/
-- Live demo: https://retentionos.34-0-15-46.sslip.io/
 
 ## License
 
