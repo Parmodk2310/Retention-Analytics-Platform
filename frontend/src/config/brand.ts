@@ -2,8 +2,11 @@ export const BRAND = {
   productName: 'RetentionOS',
   productTagline: 'Product Analytics · Churn ML · Experiments',
 
-  ownerName: 'Parmod K',
-  ownerTitle: 'Data Science & ML Engineering',
+  ownerName: 'Parmod',
+  ownerTitle: 'AI/ML Engineer',
+
+  demoAccountEmail: 'demo@example.com',
+  demoAccountName: 'Demo User',
 
   githubUsername: 'Parmodk2310',
 
