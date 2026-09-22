@@ -24,11 +24,11 @@ export const BRAND = {
     'End-to-end product analytics and ML platform for retention, churn intelligence, experimentation, and reliable event processing with FastAPI, React, PostgreSQL, Redis Streams, and GCP.',
 
   projectScale:
-    'Live demo · 10K synthetic users · ~238K product events',
+    '10K synthetic users · ~238K product events',
 
   deployment:
     'Google Compute Engine · Docker Compose · HTTPS',
 
   infrastructureNote:
-    'Public single-node GCP demo with AWS infrastructure-as-code retained as a validated reference architecture.',
+    'Public single-node GCP demo; AWS infrastructure-as-code is retained as a reference architecture.',
 } as const
