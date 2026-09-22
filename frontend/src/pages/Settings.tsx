@@ -15,6 +15,7 @@ import { Card } from "@/components/ui/Card";
 import { ErrorState } from "@/components/ui/ErrorState";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { BRAND } from "@/config/brand";
+import { getPipelineDisplayStatus } from "@/lib/pipelineStatus";
 import { systemKeys } from "@/lib/queryKeys";
 import { systemApi } from "@/services/systemApi";
 
@@ -88,13 +89,17 @@ function formatDateTime(value: string | null): string {
 }
 
 function PipelineStatusBadge({
-  status,
+  pipeline,
 }: {
-  status: EventPipelineStatus["status"];
+  pipeline: EventPipelineStatus;
 }) {
+  const status = getPipelineDisplayStatus(pipeline);
+
   const styles = {
     fresh:
       "border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
+    idle:
+      "border-sky-500/30 bg-sky-500/10 text-sky-600 dark:text-sky-400",
     stale:
       "border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-400",
     unknown: "border-border bg-muted/40",
@@ -102,6 +107,7 @@ function PipelineStatusBadge({
 
   const labels = {
     fresh: "Fresh",
+    idle: "Idle",
     stale: "Stale",
     unknown: "No signal",
   };
@@ -215,7 +221,7 @@ export default function Settings() {
         <Card className="p-5">
           <div className="mb-4 flex items-center gap-2">
             <UserRound className="h-5 w-5 text-primary" />
-            <h3 className="font-semibold">Engineer</h3>
+            <h3 className="font-semibold">Built by</h3>
           </div>
 
           <p className="text-lg font-semibold">{BRAND.ownerName}</p>
@@ -223,9 +229,8 @@ export default function Settings() {
           <p className="text-sm opacity-60">{BRAND.ownerTitle}</p>
 
           <p className="mt-3 text-sm leading-6 opacity-65">
-            End-to-end product data science system covering analytics,
-            experimentation, machine learning, backend engineering,
-            observability, and cloud-ready infrastructure.
+            Built across product analytics, experimentation, ML engineering,
+            backend systems, observability, and cloud infrastructure.
           </p>
 
           <div className="mt-5 flex flex-wrap gap-2">
@@ -326,11 +331,11 @@ export default function Settings() {
                   <h3 className="font-semibold">Event Pipeline</h3>
                 </div>
 
-                <PipelineStatusBadge status={pipeline.status} />
+                <PipelineStatusBadge pipeline={pipeline} />
               </div>
 
               <MetricRow
-                label="Freshness"
+                label="Last activity"
                 value={formatFreshness(pipeline.freshness_seconds)}
               />
 

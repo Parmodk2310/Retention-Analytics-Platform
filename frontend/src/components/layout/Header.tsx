@@ -51,6 +51,11 @@ export function Header({
 
   const title = pageTitle(location.pathname)
 
+  const accountDisplayName =
+    account?.email === BRAND.demoAccountEmail
+      ? BRAND.demoAccountName
+      : account?.full_name || 'User'
+
   const showGlobalFilters =
     ANALYTICS_FILTER_PATHS.has(
       location.pathname,
@@ -107,8 +112,7 @@ export function Header({
               <UserRound className="h-3.5 w-3.5 shrink-0" />
 
               <span className="shrink-0 font-medium">
-                {account?.full_name ||
-                  BRAND.ownerName}
+                {accountDisplayName}
               </span>
 
               {account?.email && (
@@ -126,7 +130,7 @@ export function Header({
             target="_blank"
             rel="noreferrer"
             className="hidden items-center gap-2 rounded-xl border bg-card px-3 py-2 text-sm transition hover:bg-muted md:flex"
-            aria-label="Open Parmod K portfolio"
+            aria-label={`Open ${BRAND.ownerName} portfolio`}
           >
             Portfolio
             <ExternalLink className="h-3.5 w-3.5 opacity-60" />
