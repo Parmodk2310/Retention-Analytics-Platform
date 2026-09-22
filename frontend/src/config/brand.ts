@@ -21,7 +21,7 @@ export const BRAND = {
     'https://retentionos.34-0-15-46.sslip.io/',
 
   projectDescription:
-    'Production-oriented product analytics platform spanning retention and funnel analytics, churn prediction, statistically rigorous experimentation, event reliability, observability, and cloud deployment.',
+    'End-to-end product analytics and ML platform for retention, churn intelligence, experimentation, and reliable event processing with FastAPI, React, PostgreSQL, Redis Streams, and GCP.',
 
   projectScale:
     'Live demo · 10K synthetic users · ~238K product events',
