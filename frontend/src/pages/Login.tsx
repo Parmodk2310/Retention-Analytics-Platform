@@ -38,7 +38,7 @@ export default function Login() {
   const location = useLocation()
 
   const [email, setEmail] =
-    useState(
+    useState<string>(
       BRAND.demoAccountEmail,
     )
 
