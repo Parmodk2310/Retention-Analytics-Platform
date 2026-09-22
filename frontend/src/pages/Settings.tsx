@@ -229,9 +229,8 @@ export default function Settings() {
           <p className="text-sm opacity-60">{BRAND.ownerTitle}</p>
 
           <p className="mt-3 text-sm leading-6 opacity-65">
-            End-to-end product data science system covering analytics,
-            experimentation, machine learning, backend engineering,
-            observability, and cloud-ready infrastructure.
+            Built across product analytics, experimentation, ML engineering,
+            backend systems, observability, and cloud infrastructure.
           </p>
 
           <div className="mt-5 flex flex-wrap gap-2">
