@@ -198,7 +198,7 @@ export default function Settings() {
               rel="noreferrer"
               className="rounded-full border bg-muted/30 px-2.5 py-1 text-xs transition hover:bg-muted"
             >
-              Live demo ↗
+              Open live demo ↗
             </a>
           </div>
 
@@ -415,7 +415,7 @@ export default function Settings() {
             <p className="mt-1 max-w-4xl text-sm leading-6 opacity-65">
               The repository includes Prometheus, Grafana, Alertmanager,
               and optional error-tracing integrations for observability
-              workflows. The public portfolio deployment intentionally runs a
+              workflows. The public demo deployment intentionally runs a
               smaller six-service Docker Compose footprint. PostgreSQL remains
               the application source of truth while Redis Streams provides
               durable event ingestion.
