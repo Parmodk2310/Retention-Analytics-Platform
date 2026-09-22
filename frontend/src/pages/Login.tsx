@@ -14,6 +14,9 @@ import {
   Card,
 } from '@/components/ui/Card'
 import {
+  BRAND,
+} from '@/config/brand'
+import {
   authApi,
 } from '@/services/authApi'
 import {
@@ -36,7 +39,7 @@ export default function Login() {
 
   const [email, setEmail] =
     useState(
-      'demo@example.com',
+      BRAND.demoAccountEmail,
     )
 
   const [password, setPassword] =
@@ -114,7 +117,7 @@ export default function Login() {
           await authApi.register(
             email,
             password,
-            'Parmod K',
+            BRAND.demoAccountName,
           )
       }
 
