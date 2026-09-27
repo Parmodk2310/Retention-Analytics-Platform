@@ -24,6 +24,6 @@ scipy>=1.15,<2
 statsmodels>=0.14,<0.15
 joblib>=1.4,<2
 prometheus-client>=0.22,<0.23
-sentry-sdk[fastapi]>=2.35,<3
+sentry-sdk[fastapi]>=2.70.0,<3
 structlog>=25.4,<26
 boto3>=1.40,<2
